@@ -1,0 +1,35 @@
+User
+API data
+  {
+    id:int (used to looup contacts in the contact table and saved_views table)
+    email:"email string" (required),
+    password:"encypted string" (required),
+    privacy:boolean (initially false, user must explictly set this),
+    verified:boolean <= if adding email verification
+  }
+/user : Post - Takes email and password. Returns success, user id, and emails user.
+/user/password: Patch - Updates password only
+/user/login : takes email and password, creates session is they match. Returns session token.
+/user/logout : POST - Destroys session token. Returns logout confirmation
+/user: Delete - Destroys session, Schedules account for deletion, Sends user Dear John Letter with deletion time, Destroys account at deletion time
+/user/privacy: PATCH : "Set privacy to true"
+/user/verify : PATCH : “Only add this if we are validating the email address, may combine this with /privacy”
+
+Contact
+    /contact: POST “create contact”
+    /contact: GET “view contact”
+    /contact: PUT “edit contact”
+    /contact : DELETE “delete contact”
+    /contact/datapoints : GET “get list of all the datapoints for this contact”
+    /contact/tags : GET “get list of all the tags for this contact”
+
+Contacts
+    /contacts : GET “list of contacts”
+    /contacts/delete : POST “bulk delete provided array of tags”
+/contacts/tag : GET “get contacts with the provided tag”
+/contacts/datapoints : GET get the list of all datapoints for all contacts
+Views
+    /views : Post “create saved view”
+    /views : GET “get the list of saved views”
+    /views:  Delete “delete the view”
+    // PUT is not offered to simply the work flow
